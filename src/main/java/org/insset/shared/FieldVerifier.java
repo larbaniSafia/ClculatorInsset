@@ -1,5 +1,9 @@
 package org.insset.shared;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * <p>
  * FieldVerifier validates that the name the user enters is valid.
@@ -53,16 +57,50 @@ public class FieldVerifier {
      */
     public static boolean isValidDecimal(Integer nbr) {
         //Implement your code
-        return true;
+         if (!(nbr>1 && nbr<4000))  
+            return false;
+          return true;
     }
 
     public static boolean isValidRoman(String nbr) {
         //Implement your code
+        if(nbr.length()==0){
+            return false;
+        }
+        
+        boolean tmp=false ;
+        String [] tabDechiffresRomains={"I","V","X","L","C","D","M"};
+        for(int i=0; i<nbr.length(); i++)
+        {
+            for(int j=0;j<tabDechiffresRomains.length;j++){
+                if(nbr.substring(i,i+1).equals(tabDechiffresRomains[j]))
+                    tmp=true;
+            }
+            if(tmp==false) return false;
+        }   
         return true;
     }
+    
 
     public static boolean isValidDate(String date) {
         //Implement your code
+        
+        if(date.length()==0){
+            return false;
+        }
+        
+        SimpleDateFormat fd = new SimpleDateFormat("MM-dd-yyyy");
+        fd.setLenient(false);
+        try
+        {
+            Date x =fd.parse(date); 
+        }
+        // cas ou : le format la date est invalide une exception sera levée
+        catch (ParseException e)
+        {
+            return false;
+        }
+        // cas ou: le format de la date est valide    
         return true;
     }
 }
