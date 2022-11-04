@@ -51,18 +51,69 @@ public class FieldVerifier {
      * @param name the name to validate
      * @return true if valid, false if invalid
      */
+
+     
+    //terence
+
     public static boolean isValidDecimal(Integer nbr) {
         //Implement your code
-        return true;
+         if (!(nbr>0 && nbr<4000))  
+            return false;
+          return true;
     }
 
+    //celia
     public static boolean isValidRoman(String nbr) {
         //Implement your code
+        if(nbr.length()==0){
+            return false;
+        }
+        
+        boolean tmp=false ;
+        String [] tabDechiffresRomains={"I","V","X","L","C","D","M"};
+        for(int i=0; i<nbr.length(); i++)
+        {
+            for(int j=0;j<tabDechiffresRomains.length;j++){
+                if(nbr.substring(i,i+1).equals(tabDechiffresRomains[j]))
+                    tmp=true;
+            }
+            if(tmp==false) return false;
+        }   
         return true;
     }
 
+
+    //safia
+    public static boolean formatDateValide(String date){
+        Boolean trOrFs=false;
+        if(date.charAt(2)==('-') && date.charAt(5)==('-')){
+            trOrFs=true;
+        }
+        if(trOrFs==true){
+            boolean isDdNumeric=date.substring(0, 2).matches("[+-]?\\d*(\\.\\d+)?");
+            boolean isMmNumeric=date.substring(3, 5).matches("[+-]?\\d*(\\.\\d+)?");
+            boolean isYyyyNumeric=date.substring(6).matches("[+-]?\\d*(\\.\\d+)?");
+            
+            if(isDdNumeric==true && isMmNumeric==true && isYyyyNumeric==true){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //safia
     public static boolean isValidDate(String date) {
         //Implement your code
+        
+        if(date.length()==0){
+            return false;
+        }else if(date.length()!=10){
+            return false;
+        }
+
+        if(formatDateValide(date)==false){
+            return false;
+        }
         return true;
     }
 }
